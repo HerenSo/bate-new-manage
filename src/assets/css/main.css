@@ -20,6 +20,17 @@ a {
     text-decoration: none
 }
 
+/*颜色*/
+.red{
+    color: #ff0000 !important;
+}
+.green{
+	color: #67C23A !important;
+}
+.orange{
+	color: #E6A23C !important;
+}
+
 
 .content-box {
     position: absolute;
@@ -96,6 +107,7 @@ a {
 }
 .tags .tags-li{
 	margin: 0;
+	padding: 1px 5px 0 15px;
 	border-radius: 0;
 	height: 42px;
 	line-height: 42px;
@@ -129,6 +141,37 @@ a {
 
 .el-time-spinner__wrapper .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
     padding-bottom: 0;
+}
+
+
+/*数据检索栏*/
+.handle-box {
+    margin-bottom: 10px;
+}
+.handle-select {
+    width: 120px;
+}
+.handle-input-xs {
+    width: 80px;
+    display: inline-block;
+}
+.handle-input-sm {
+    width: 120px;
+    display: inline-block;
+}
+.handle-input-md {
+    width: 180px !important;
+    display: inline-block;
+}
+.handle-input-lg {
+    width: 300px;
+    display: inline-block;
+}
+.demo-input-suffix{
+    margin-bottom: 10px;
+	display: inline-block;
+	color: #333;
+	font-size: 14px;
 }
 
 /*Upload*/

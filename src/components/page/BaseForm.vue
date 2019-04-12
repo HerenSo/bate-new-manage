@@ -53,7 +53,7 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">表单提交</el-button>
-                        <el-button>取消</el-button>
+                        <el-button @click="cancel">取消</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+    import bus from '../common/bus';
     export default {
         name: 'baseform',
         data: function(){
@@ -135,6 +136,9 @@
         methods: {
             onSubmit() {
                 this.$message.success('提交成功！');
+            },
+            cancel() {
+            	bus.$emit('close_current_tags',"area");
             }
         }
     }

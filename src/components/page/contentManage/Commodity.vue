@@ -1,4 +1,4 @@
-<!-- 区域管理  -->  
+<!-- 商品管理  -->
 <template>
     <div class="table">
         <div class="container">
@@ -14,8 +14,9 @@
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
-                        <el-button type="text" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                        <el-button type="text" icon="el-icon-delete" class="red" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                        <el-button type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                        <el-button type="text" class="orange" @click="handleSingle(scope.$index, scope.row)">快递单</el-button>
+                        <el-button type="text" class="green" @click="handleEdit(scope.$index, scope.row)">导出Excle</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -140,6 +141,9 @@
 //              }
 //              this.editVisible = true;
 				this.$router.push('/areaEdit?id='+index+'&tab=-1');
+            },
+            handleSingle(index, row) {
+            	this.$router.push('/areaEdit?id='+index);
             },
             handleDelete(index, row) {
                 this.idx = index;

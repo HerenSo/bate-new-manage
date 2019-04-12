@@ -30,8 +30,13 @@ export default new Router({
                     meta: { title: '区域管理' }
                 },
                 {
+                    path: '/areaEdit',
+                    component: resolve => require(['../components/page/contentManage/AreaEdit.vue'], resolve),
+                    meta: { title: '区域编辑' }
+                },
+                {
                     path: '/commodity',
-                    component: resolve => require(['../components/page/contentManage/Area.vue'], resolve),
+                    component: resolve => require(['../components/page/contentManage/Commodity.vue'], resolve),
                     meta: { title: '商品管理' }
                 },
                 {
@@ -53,6 +58,41 @@ export default new Router({
                     path: '/stationSet',
                     component: resolve => require(['../components/page/contentManage/StationSet.vue'], resolve),
                     meta: { title: '全站设置' }
+                },
+                {
+                    path: '/agent',
+                    component: resolve => require(['../components/page/contentManage/Area.vue'], resolve),
+                    meta: { title: '代理管理' }
+                },
+                {
+                    path: '/financialDetails',
+                    component: resolve => require(['../components/page/contentManage/FinancialDetails.vue'], resolve),
+                    meta: { title: '资金明细' }
+                },
+                {
+                    path: '/financialAudit',
+                    component: resolve => require(['../components/page/contentManage/FinancialDetails.vue'], resolve),
+                    meta: { title: '资金审核' }
+                },
+                {
+                    path: '/rechargeRecord',
+                    component: resolve => require(['../components/page/contentManage/FinancialDetails.vue'], resolve),
+                    meta: { title: '充值记录' }
+                },
+                {
+                    path: '/substationReport',
+                    component: resolve => require(['../components/page/contentManage/SubstationReport.vue'], resolve),
+                    meta: { title: '分站报表' }
+                },
+                {
+                    path: '/adminSettings',
+                    component: resolve => require(['../components/page/contentManage/Area.vue'], resolve),
+                    meta: { title: '管理员设置' }
+                },
+                {
+                    path: '/adminLog',
+                    component: resolve => require(['../components/page/contentManage/Area.vue'], resolve),
+                    meta: { title: '管理日志' }
                 },
                 {
                     path: '/tabs',

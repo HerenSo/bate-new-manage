@@ -84,13 +84,20 @@
         },
         watch:{
             $route(newValue, oldValue){
-                this.setTags(newValue);
+            	if(newValue.query.tab != "-1"){
+            		console.log("newValue++",newValue);
+            		this.setTags(newValue);
+            	}
             }
         },
         created(){
             this.setTags(this.$route);
             // 监听关闭当前页面的标签页
-            bus.$on('close_current_tags', () => {
+            bus.$on('close_current_tags', (param) => {
+            	if(param){
+            		this.$router.push('/'+param);
+            		return;
+            	}
                 for (let i = 0, len = this.tagsList.length; i < len; i++) {
                     const item = this.tagsList[i];
                     if(item.path === this.$route.fullPath){
