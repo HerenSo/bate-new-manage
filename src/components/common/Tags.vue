@@ -70,6 +70,9 @@
                         path: route.fullPath,
                         name: route.matched[1].components.default.name
                     })
+                    if(typeof route.params.title != "undefined"){ // 判断是否需要修改tab标题
+                    	this.tagsList[0].title = route.params.title;
+                    }
                 }
                 bus.$emit('tags', this.tagsList);
             },
@@ -84,10 +87,14 @@
         },
         watch:{
             $route(newValue, oldValue){
-            	if(newValue.query.tab != "-1"){
+            	if(newValue.path == "/dashboard"){ // 如果路由发生改变，新路由跳转的是首页，直接返回，不需要设置TAB
+            		return;
+            	}
+            	if(newValue.query.tab != "-1"){ // 当新路由的参数tab值为-1时，不需要设置TAB，反之需要设置TAB
             		console.log("newValue++",newValue);
             		this.setTags(newValue);
             	}
+            	
             }
         },
         created(){

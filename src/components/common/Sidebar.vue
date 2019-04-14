@@ -38,11 +38,11 @@
             return {
                 collapse: false,
                 items: [
-                    {
-                        icon: 'el-icon-lx-home',
-                        index: 'dashboard',
-                        title: '系统首页'
-                    },
+//                  {
+//                      icon: 'el-icon-lx-home',
+//                      index: 'dashboard',
+//                      title: '系统首页'
+//                  },
                     {
                         icon: 'el-icon-lx-rank',
                         index: 'contentManage',
@@ -225,4 +225,9 @@
     .sidebar > ul {
         height:100%;
     }
+    .el-submenu__title{
+    	height: 46px;
+    	line-height: 46px;
+    }
+    
 </style>

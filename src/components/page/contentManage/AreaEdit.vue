@@ -12,7 +12,7 @@
                 <el-form ref="form" :model="form" label-width="80px">
                     <el-form-item label="城市级联">
                     	<v-distpicker :province="select.province" :city="select.city" @province="onChangeProvince" @city="onChangeCity" hide-area></v-distpicker>
-                    	<el-input class="handle-input-md" v-model="select.area" size="large" placeholder="请输入区域名称"></el-input>
+                    	<el-input class="handle-input-md" v-model="select.area"  placeholder="请输入区域名称"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -69,13 +69,17 @@
         color: #999;
         display: inline-block;
         margin-right: 5px;
+        vertical-align: -1px;
     }
     .distpicker-address-wrapper select {
 	  /*background-color: #f5f7fa;*/
 	  border-color: #DCDFE6;
 	  /*color: #c0c4cc;*/
-	  cursor: not-allowed;
+	  cursor: pointer;
 	  min-width: 120px;
+	  font-size: inherit !important;
+	  height: 32px !important;
+	  padding: 5px 12px;
 	}
     .divwrap>>>.address-header{
         position: fixed;

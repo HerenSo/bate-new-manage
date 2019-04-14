@@ -1,12 +1,25 @@
-<!-- 商品管理  -->
 <template>
     <div class="table">
         <div class="container">
             <div class="handle-box">
                 <el-button type="primary" icon="delete" @click="">刷新</el-button>
-                <el-button type="primary" icon="delete" @click="">新增</el-button>
-                <el-button type="primary" icon="delete" @click="delAll">批量删除</el-button>
-                <el-button type="primary" icon="search" @click="">同步到分站</el-button>
+                <el-button type="primary" icon="delete" class="mr10" @click="delAll">批量删除</el-button>
+				<div class="demo-input-suffix mr10">
+					年份：
+					<el-date-picker
+				      v-model="year"
+				      type="year"
+					  value-format="yyyy"
+				      placeholder="选择年"
+				      @change="search">
+				    </el-date-picker>
+				</div>
+                <el-select v-model="select_cate" placeholder="筛选" class="handle-select mr10">
+                    <el-option key="1" label="广东省" value="广东省"></el-option>
+                    <el-option key="2" label="湖南省" value="湖南省"></el-option>
+                </el-select>
+                <el-input v-model="select_word" placeholder="筛选关键词" class="handle-input mr10"></el-input>
+                <el-button type="primary" icon="search" @click="search">搜索</el-button>
             </div>
             <el-table :data="data" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
@@ -14,9 +27,8 @@
                 </el-table-column>
                 <el-table-column label="操作" width="180" align="center">
                     <template slot-scope="scope">
-                        <el-button type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                        <el-button type="text" class="orange" @click="handleSingle(scope.$index, scope.row)">快递单</el-button>
-                        <el-button type="text" class="green" @click="handleEdit(scope.$index, scope.row)">导出Excle</el-button>
+                        <el-button type="text" icon="el-icon-edit" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                        <el-button type="text" icon="el-icon-delete" class="red" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -59,7 +71,7 @@
 
 <script>
     export default {
-        name: 'basetable',
+        name: 'commoditySingle',
         data() {
             return {
                 url: './vuetable.json',
@@ -72,6 +84,7 @@
                 is_search: false,
                 editVisible: false,
                 delVisible: false,
+                year: '',
                 form: {
                     name: '',
                     date: '',
@@ -132,18 +145,14 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-//              this.idx = index;
-//              const item = this.tableData[index];
-//              this.form = {
-//                  name: item.name,
-//                  date: item.date,
-//                  address: item.address
-//              }
-//              this.editVisible = true;
-				this.$router.push('/areaEdit?id='+index+'&tab=-1');
-            },
-            handleSingle(index, row) {
-            	this.$router.push('/areaEdit?id='+index);
+                this.idx = index;
+                const item = this.tableData[index];
+                this.form = {
+                    name: item.name,
+                    date: item.date,
+                    address: item.address
+                }
+                this.editVisible = true;
             },
             handleDelete(index, row) {
                 this.idx = index;

@@ -36,8 +36,19 @@ export default new Router({
                 },
                 {
                     path: '/commodity',
-                    component: resolve => require(['../components/page/contentManage/Commodity.vue'], resolve),
+                    component: resolve => require(['../components/page/commodity/Commodity.vue'], resolve),
                     meta: { title: '商品管理' }
+                },
+                {
+                    path: '/commodityEdit',
+                    component: resolve => require(['../components/page/commodity/CommodityEdit.vue'], resolve),
+                    meta: { title: '商品管理-编辑' }
+                },
+                {
+                	name: 'commoditySingle',
+                    path: '/commoditySingle',
+                    component: resolve => require(['../components/page/commodity/CommoditySingle.vue'], resolve),
+                    meta: { title: '快递单' }
                 },
                 {
                     path: '/order',
