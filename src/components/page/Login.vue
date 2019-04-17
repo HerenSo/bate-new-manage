@@ -1,5 +1,6 @@
 <template>
     <div class="login-wrap">
+    	<div class="login-wrap2"></div>
         <div class="ms-login">
             <div class="ms-title"><i class="el-icon-lx-global"></i> 后台管理系统 <small>Beta</small></div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content" size="medium">
@@ -9,7 +10,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item prop="password" label="">
-                    <el-input type="password" placeholder="请输入密码" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')">
+                    <el-input type="password" placeholder="请输入密码"  v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')">
                         <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
                     </el-input>
                 </el-form-item>
@@ -78,12 +79,23 @@
         position: relative;
         width:100%;
         height:100%;
-        background-image: url(../../assets/img/login-bg.jpg);
+        background-image: url(../../assets/img/login-bg3.jpg);
         background-size: 100%;
+    }
+    .login-wrap2{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width:100%;
+        height:100%;
+        background-image: url(../../assets/img/login-bg2.jpg);
+        background-size: 100%;
+        opacity: 0.2;
     }
     .ms-title{
         width:100%;
-        line-height: 50px;
+        line-height: 80px;
         text-align: center;
         font-size:28px;
     	color: #f7fafd;
@@ -97,14 +109,14 @@
         position: absolute;
         left:50%;
         top:50%;
-        width:350px;
-        margin:-190px 0 0 -175px;
+        width:430px;
+        margin:-215px 0 0 -215px;
         border-radius: 5px;
         background: rgba(255,255,255, 0.9);
         overflow: hidden;
     }
     .ms-content{
-        padding: 30px 30px;
+        padding: 40px 50px;
     }
     .login-btn{
         text-align: center;
