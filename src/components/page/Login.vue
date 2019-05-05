@@ -5,16 +5,16 @@
             <div class="ms-title"><i class="el-icon-lx-global"></i> 后台管理系统 <small>Beta</small></div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content" size="medium">
                 <el-form-item prop="username" label="">
-                    <el-input v-model="ruleForm.username" placeholder="请输入用户名">
+                    <el-input v-model="ruleForm.loginName" placeholder="请输入用户名">
                         <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
                     </el-input>
                 </el-form-item>
                 <el-form-item prop="password" label="">
-                    <el-input type="password" placeholder="请输入密码"  v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')">
+                    <el-input type="password" placeholder="请输入密码"  v-model="ruleForm.loginPwd" @keyup.enter.native="submitForm('ruleForm')">
                         <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
                     </el-input>
                 </el-form-item>
-                <el-form-item prop="code">
+                <!--<el-form-item prop="code">
                 	<el-col :span="16">
 	                    <el-input type="text" placeholder="请输入验证码" v-model="ruleForm.code" >
 	                    </el-input>
@@ -22,7 +22,7 @@
                    	<el-col :span="7" class="code">
                     	<img :src="codeUrl" @click.prevent="codeRefresh()" />
                     </el-col>
-                </el-form-item>
+                </el-form-item>-->
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
@@ -36,21 +36,23 @@
         data: function(){
             return {
                 ruleForm: {
-                    username: 'admin',
-                    password: '123123',
-                    code:'',
+                    'loginName': '18670477951',
+                    'loginPwd': '123456',
+//                  code:'',
                 },
                 rules: {
-                    username: [
+                    loginName: [
                         { required: true, message: '请输入用户名', trigger: 'blur' }
                     ],
-                    password: [
+                    loginPwd: [
                         { required: true, message: '请输入密码', trigger: 'blur' }
                     ],
-                    code: [
-                        { required: true, message: '请输入验证码', trigger: 'blur' }
-                    ]
+//                  code: [
+//                      { required: true, message: '请输入验证码', trigger: 'blur' }
+//                  ]
                 },
+                userToken: '',
+                loginName: "",
                 codeUrl:''
             }
         },
@@ -58,8 +60,22 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/');
+                    	this.$axios.post('login',this.ruleForm
+				        ).then(res => {
+//				          console.log(res.data);
+//				          alert('登陆成功');
+//				          this.userToken = res.data.data.tokenId;
+				          this.loginName = res.data.data.loginName;
+//				          localStorage.setItem("userToken",this.userToken);
+				          localStorage.setItem("ms_username",this.loginName);
+//				          localStorage.setItem("ms_rights",JSON.stringify(res.data.data.rights));
+//				          // 将用户token保存到vuex中
+//				          _this.changeLogin({ Authorization: _this.userToken });
+				          this.$router.push('/area');
+				        }).catch(error => {
+//				          alert('账号或密码错误');
+				          console.log(error);
+				        });
                     } else {
                         console.log('error submit!!');
                         return false;

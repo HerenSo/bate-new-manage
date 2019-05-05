@@ -6,15 +6,25 @@ import { Message } from 'element-ui';
 // http request 拦截器
 axios.interceptors.request.use(
   config => {
-    //config.data = JSON.stringify(config.data);  
-    config.headers['Content-Type'] = 'application/json;charset=UTF-8';
+
+    config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
     //判断是否存在ticket，如果存在的话，则每个http header都加上ticket
-    if (localStorage.getItem("userToken")) {
-        //用户每次操作，都将cookie设置成2小时
-//      cookie.set("token",cookie.get("token") ,1/12)    
-　　　　       config.headers.tokenId = localStorage.getItem("userToken");
-    }
-    
+//  if (localStorage.getItem("userToken")) {
+//      //用户每次操作，都将cookie设置成2小时
+////      cookie.set("token",cookie.get("token") ,1/12)    
+//　　　　       config.headers.tokenId = localStorage.getItem("userToken");
+//  }
+    config.transformRequest = [function (data) {
+			if(Array.isArray(data) || Object.prototype.toString.apply(data) ==='[object Object]'){
+	        let ret = '';
+	        for (let it in data) {
+	            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+	        }
+	        return ret
+	    } else {
+	        return data;
+	    }
+ 		 }]
     return config;
   },
   error => {
@@ -25,10 +35,14 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
-  	if (response.status === 200) {
-  		if (response.data.code == '0000'){
+  		if (response.data.code == '200'){
 	        return response;
-  		}else if (response.data.code == '1002' || response.data.code == '9001') {
+  		}else if (response.data.code == '10' 
+  		|| response.data.code == '11' 
+  		|| response.data.code == '21' 
+  		|| response.data.code == '22' 
+  		|| response.data.code == '35'
+  		|| response.data.code == '36') {
   			console.log(response.data.code);
 	        Message({
 	          message: response.data.msg,
@@ -47,7 +61,7 @@ axios.interceptors.response.use(
 	        });
 	        return
 	    }
-    }
+//  }
   },
   error => {
   	console.log(error.response)
